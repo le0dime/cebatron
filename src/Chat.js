@@ -3,7 +3,6 @@ import { ChatManager, TokenProvider } from '@pusher/chatkit'
 import MessageList from './MessageList'
 import SendMessageForm from './SendMessageForm'
 import OnlineList from './OnlineList'
-import config from '../configuration.js'
 
 class Chat extends React.Component {
   state = {
@@ -14,10 +13,10 @@ class Chat extends React.Component {
 
   componentDidMount() {
     const chatkit = new ChatManager({
-      instanceLocator: 'YOUR INSTANCE LOCATOR',
+      instanceLocator: 'INSTANCE LOCATOR',
       userId: this.props.currentId,
       tokenProvider: new TokenProvider({
-        url: 'YOUR TOKEN PROVIDER URL'
+          url: 'URL'
       })
     })
 
@@ -27,7 +26,7 @@ class Chat extends React.Component {
         this.setState({ currentUser })
 
         return currentUser.subscribeToRoom({
-          roomId: 8434070,
+          roomId: this.props.roomId,
           messageLimit: 100,
           hooks: {
             onNewMessage: message => {
